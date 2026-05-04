@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "powerscript-parser"
+version = "0.1.0"
+description = "Forensic parser for PowerShell transcripts and PSReadLine console history."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [
+  { name = "sethenoka" }
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.13",
+  "ruff>=0.8",
+]
+
+[project.scripts]
+powerscript-parser = "powerscript_parser.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+  "A",
+  "ARG",
+  "B",
+  "C4",
+  "E",
+  "F",
+  "I",
+  "N",
+  "PERF",
+  "PIE",
+  "PL",
+  "PTH",
+  "RET",
+  "RUF",
+  "SIM",
+  "UP",
+  "W",
+]
+ignore = [
+  "PLR0913",
+  "PLR2004",
+  "PERF203",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["E402", "S101"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_unreachable = true
+show_error_codes = true
+mypy_path = "src"
+files = ["src", "tests"]
